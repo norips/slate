@@ -235,11 +235,13 @@
 
 <p>This example API documentation page was created with <a href="https://github.com/tripit/slate">Slate</a>. Feel free to edit it and use it as a base for your own API&rsquo;s documentation.</p>
 
-<h1 id="type-des-requ-tes">Type des requêtes</h1>
+<h1 id="requ-tes">Requêtes</h1>
 
 <p>Une action correspondent à un type.</p>
 
 <h2 id="register">register</h2>
+
+<p><code class="prettyprint">register</code> permet de s&#39;enregistrer auprés du bus.</p>
 
 <blockquote>
 <p>Requête</p>
@@ -257,13 +259,10 @@
   </span><span class="s2">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"register"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"ack"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s2">"resp"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="w"> </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-
 </span></code></pre>
-<p><code class="prettyprint">register</code> permet de s&#39;enregistrer auprés du bus.</p>
+<p><strong>Paramètres</strong></p>
 
-<h3 id="param-tres">Paramètres</h3>
-
-<h4 id="requ-te">Requête</h4>
+<p><em>Requête</em></p>
 
 <table><thead>
 <tr>
@@ -284,7 +283,7 @@
 </tr>
 </tbody></table>
 
-<h4 id="r-ponse">Réponse</h4>
+<p><em>Réponse</em></p>
 
 <table><thead>
 <tr>
@@ -302,13 +301,274 @@
 
 <h2 id="deregister">deregister</h2>
 
+<p><code class="prettyprint">deregister</code> permet de se déconnecter du bus.</p>
+
+<blockquote>
+<p>Requête</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"deregister"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"sender_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Réponse</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"deregister"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"ack"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s2">"resp"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="w"> </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p><strong>Paramètres</strong></p>
+
+<p><em>Requête</em></p>
+
+<table><thead>
+<tr>
+<th>Paramètres</th>
+<th>Objet</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>sender_id</td>
+<td><code class="prettyprint">ID</code></td>
+<td>ID unique du capteur</td>
+</tr>
+</tbody></table>
+
+<p><em>Réponse</em></p>
+
+<table><thead>
+<tr>
+<th>Paramètres</th>
+<th>Objet</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ack</td>
+<td><code class="prettyprint">ACK</code></td>
+<td>Accusé de réception</td>
+</tr>
+</tbody></table>
+
 <h2 id="send">send</h2>
+
+<p><code class="prettyprint">send</code> permet d&#39;envoyer un message au bus.</p>
+
+<blockquote>
+<p>Requête</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"send"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"sender_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"contents"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s2">"lat"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mf">-49.202458</span><span class="p">,</span><span class="w"> </span><span class="s2">"lng"</span><span class="p">:</span><span class="w"> </span><span class="mf">20.687594</span><span class="w"> </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Réponse</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"send"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"ack"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s2">"resp"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="w"> </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p><strong>Paramètres</strong></p>
+
+<p><em>Requête</em></p>
+
+<table><thead>
+<tr>
+<th>Paramètres</th>
+<th>Objet</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>sender_id</td>
+<td><code class="prettyprint">ID</code></td>
+<td>ID unique du capteur</td>
+</tr>
+<tr>
+<td>contents</td>
+<td><code class="prettyprint">CLASS_CONTENTS</code></td>
+<td>Payload spécifique à chaque classe <a href="#class-class_contents">voir ici</a></td>
+</tr>
+</tbody></table>
+
+<p><em>Réponse</em></p>
+
+<table><thead>
+<tr>
+<th>Paramètres</th>
+<th>Objet</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ack</td>
+<td><code class="prettyprint">ACK</code></td>
+<td>Accusé de réception</td>
+</tr>
+</tbody></table>
 
 <h2 id="get">get</h2>
 
+<p><code class="prettyprint">get</code> permet de récuperer un message du bus.</p>
+
+<blockquote>
+<p>Requête</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"get"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"sender_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"msg_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1025</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Réponse</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"get"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"ack"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s2">"resp"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="w"> </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"msg_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1025</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"date"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1488463439214</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"contents"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s2">"lat"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mf">-49.202458</span><span class="p">,</span><span class="w"> </span><span class="s2">"lng"</span><span class="p">:</span><span class="w"> </span><span class="mf">20.687594</span><span class="w"> </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p><strong>Paramètres</strong></p>
+
+<p><em>Requête</em></p>
+
+<table><thead>
+<tr>
+<th>Paramètres</th>
+<th>Objet</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>sender_id</td>
+<td><code class="prettyprint">ID</code></td>
+<td>ID unique du capteur</td>
+</tr>
+<tr>
+<td>msg_id</td>
+<td><code class="prettyprint">MSG_ID</code></td>
+<td>Numéro unique du message</td>
+</tr>
+</tbody></table>
+
+<p><em>Réponse</em></p>
+
+<table><thead>
+<tr>
+<th>Paramètres</th>
+<th>Objet</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ack</td>
+<td><code class="prettyprint">ACK</code></td>
+<td>Accusé de réception</td>
+</tr>
+<tr>
+<td>msg_id</td>
+<td><code class="prettyprint">MSG_ID</code></td>
+<td>Numéro unique du message</td>
+</tr>
+<tr>
+<td>date</td>
+<td><code class="prettyprint">DATE</code></td>
+<td>Nombre de milliseconde depuis 1970, timestampé par le bus</td>
+</tr>
+<tr>
+<td>contents</td>
+<td><code class="prettyprint">CLASS_CONTENTS</code></td>
+<td>Payload spécifique à chaque classe <a href="#class-class_contents">voir ici</a></td>
+</tr>
+</tbody></table>
+
 <h2 id="get_last">get_last</h2>
 
-<h1 id="type-des-objets">Type des objets</h1>
+<p><code class="prettyprint">get_last</code> permet de récuperer un message du bus.</p>
+
+<blockquote>
+<p>Requête</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"get_last"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"sender_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Réponse</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"get_last"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"ack"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s2">"resp"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="w"> </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"msg_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1125</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"date"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1488463439214</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"contents"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s2">"lat"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mf">-49.202458</span><span class="p">,</span><span class="w"> </span><span class="s2">"lng"</span><span class="p">:</span><span class="w"> </span><span class="mf">20.687594</span><span class="w"> </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p><strong>Paramètres</strong></p>
+
+<p><em>Requête</em></p>
+
+<table><thead>
+<tr>
+<th>Paramètres</th>
+<th>Objet</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>sender_id</td>
+<td><code class="prettyprint">ID</code></td>
+<td>ID unique du capteur</td>
+</tr>
+<tr>
+<td>contents</td>
+<td><code class="prettyprint">CLASS_CONTENTS</code></td>
+<td>Payload spécifique à chaque classe <a href="#class-class_contents">voir ici</a></td>
+</tr>
+</tbody></table>
+
+<p><em>Réponse</em></p>
+
+<table><thead>
+<tr>
+<th>Paramètres</th>
+<th>Objet</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ack</td>
+<td><code class="prettyprint">ACK</code></td>
+<td>Accusé de réception</td>
+</tr>
+<tr>
+<td>msg_id</td>
+<td><code class="prettyprint">MSG_ID</code></td>
+<td>Numéro unique du message</td>
+</tr>
+<tr>
+<td>date</td>
+<td><code class="prettyprint">DATE</code></td>
+<td>Nombre de milliseconde depuis 1970, timestampé par le bus</td>
+</tr>
+<tr>
+<td>contents</td>
+<td><code class="prettyprint">CLASS_CONTENTS</code></td>
+<td>Payload spécifique à chaque classe <a href="#class-class_contents">voir ici</a></td>
+</tr>
+</tbody></table>
+
+<h1 id="objets">Objets</h1>
 
 <h2 id="ack">ACK</h2>
 
@@ -328,7 +588,7 @@
 <pre class="highlight json tab-json"><code><span class="w">
 </span><span class="p">{</span><span class="w">
   </span><span class="s2">"resp"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"error"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"error_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"401"</span><span class="w">
+  </span><span class="s2">"error_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">401</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <h2 id="string">STRING</h2>
@@ -338,163 +598,99 @@
 <p><em>Exemple</em> :
 <code class="prettyprint">&quot;Gps 1&quot;</code></p>
 
-<h2 id="class">CLASS</h2>
+<h2 id="msg_id">MSG_ID</h2>
+
+<p>Numéro unique par capteur, représentant un message. <em>nombre entier</em></p>
+
+<h2 id="date">DATE</h2>
+
+<p>Le nombre de seconde depuis 1970 timestampé par le bus. <em>nombre entier</em></p>
+
+<blockquote>
+<p>Exemple</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="s2">"date"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1488463439214</span><span class="w">
+</span></code></pre>
+<h2 id="class-class_contents">CLASS &amp; CLASS_CONTENTS</h2>
 
 <h3 id="gps">GPS</h3>
 
-<h3 id="acceleromotre">Acceleromotre</h3>
+<p>Les capteurs GPS font parties de la classe <code class="prettyprint">&quot;GPS&quot;</code> .</p>
+
+<h4 id="class_contents">CLASS_CONTENTS</h4>
+
+<blockquote>
+<p>Exemple</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"send"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sender_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"contents"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"lat"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mf">-49.2578645</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"lng"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mf">20.2655465</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Le <code class="prettyprint">CLASS_CONTENTS</code> de la classe <code class="prettyprint">GPS</code> est un objet JSON avec deux champs:</p>
+
+<ul>
+<li><code class="prettyprint">lat</code> représentant la latitude, <em>décimal pointé</em></li>
+<li><code class="prettyprint">lng</code> représentant la longitude, <em>décimal pointé</em></li>
+</ul>
+
+<h3 id="acc-l-rom-tre">Accéléromètre</h3>
+
+<blockquote>
+<p>Exemple</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"send"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sender_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"contents"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"x"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mf">1.25</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"y"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mf">1.47</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"z"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Les capteurs de type accéléromètre font parties de la classe <code class="prettyprint">&quot;Accelerometer&quot;</code> .</p>
+
+<h4 id="class_contents">CLASS_CONTENTS</h4>
+
+<p>Le <code class="prettyprint">CLASS_CONTENTS</code> de la classe <code class="prettyprint">Accelerometer</code> est un objet JSON avec trois champs:</p>
+
+<ul>
+<li><code class="prettyprint">x</code> représentant l&#39;accélération sur l&#39;axe X, <em>décimal pointé</em></li>
+<li><code class="prettyprint">y</code> représentant l&#39;accélération sur l&#39;axe Y, <em>décimal pointé</em></li>
+<li><code class="prettyprint">z</code> représentant l&#39;accélération sur l&#39;axe Z, <em>décimal pointé</em></li>
+</ul>
 
 <h3 id="gyroscope">Gyroscope</h3>
 
-<h1 id="authentication">Authentication</h1>
-
 <blockquote>
-<p>To authorize, use this code:</p>
-</blockquote>
-<pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="s2">"api_endpoint_here"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-</code></pre>
-<blockquote>
-<p>Make sure to replace <code class="prettyprint">meowmeowmeow</code> with your API key.</p>
-</blockquote>
-
-<p>Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our <a href="http://example.com/developers">developer portal</a>.</p>
-
-<p>Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
-
-<p><code class="prettyprint">Authorization: meowmeowmeow</code></p>
-
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
-
-<h1 id="kittens">Kittens</h1>
-
-<h2 id="get-all-kittens">Get All Kittens</h2>
-<pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">kittens</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">();</span>
-</code></pre>
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluffums"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"calico"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
-</span></code></pre>
-<p>This endpoint retrieves all kittens.</p>
-
-<h3 id="http-request">HTTP Request</h3>
-
-<p><code class="prettyprint">GET http://example.com/api/kittens</code></p>
-
-<h3 id="query-parameters">Query Parameters</h3>
-
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Default</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>include_cats</td>
-<td>false</td>
-<td>If set to true, the result will also include cats.</td>
-</tr>
-<tr>
-<td>available</td>
-<td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
-</tr>
-</tbody></table>
-
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
-
-<h2 id="get-a-specific-kitten">Get a Specific Kitten</h2>
-<pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
-</code></pre>
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>Exemple</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+    </span><span class="s2">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"send"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sender_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"contents"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"x"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">120</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"y"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">300</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"z"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+    </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This endpoint retrieves a specific kitten.</p>
+<p>Les capteurs de type gyroscope font parties de la classe <code class="prettyprint">&quot;Gyroscope&quot;</code> .</p>
 
-<aside class="warning">Inside HTML code blocks like this one, you can&rsquo;t use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+<h4 id="class_contents">CLASS_CONTENTS</h4>
 
-<h3 id="http-request">HTTP Request</h3>
+<p>Le <code class="prettyprint">CLASS_CONTENTS</code> de la classe <code class="prettyprint">Gyroscope</code> est un objet JSON avec trois champs:</p>
 
-<p><code class="prettyprint">GET http://example.com/kittens/&lt;ID&gt;</code></p>
-
-<h3 id="url-parameters">URL Parameters</h3>
-
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>ID</td>
-<td>The ID of the kitten to retrieve</td>
-</tr>
-</tbody></table>
+<ul>
+<li><code class="prettyprint">x</code> représentant l&#39;orientation de l&#39;axe X, <em>nombre entier</em></li>
+<li><code class="prettyprint">y</code> représentant l&#39;orientation de l&#39;axe Y, <em>nombre entier</em></li>
+<li><code class="prettyprint">z</code> représentant l&#39;orientation de l&#39;axe Z, <em>nombre entier</em></li>
+</ul>
 
           <h1 id="errors">Errors</h1>
 
