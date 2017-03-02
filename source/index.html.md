@@ -25,11 +25,13 @@ We have language bindings in Shell, Ruby, and Python! You can view code examples
 
 This example API documentation page was created with [Slate](https://github.com/tripit/slate). Feel free to edit it and use it as a base for your own API's documentation.
 
-# Type des requêtes 
+# Requêtes 
 
 Une action correspondent à un type.
 
 ## register
+
+`register` permet de s'enregistrer auprés du bus.
 
 > Requête
 
@@ -48,27 +50,181 @@ Une action correspondent à un type.
   "type" : "register",
   "ack" : { "resp" : "ok" }
 }
-
 ```
-`register` permet de s'enregistrer auprés du bus.
 
-### Paramètres
-#### Requête
+**Paramètres**
+
+*Requête*
+
 Paramètres | Objet | Description
 --------- | ---  |-----------
 sender_class | `CLASS` | Nom de la classe 
 sender_name | `STRING`  | Nom du capteur
 
-#### Réponse
+*Réponse*
+
 Paramètres | Objet | Description
 --------- | ---  |-----------
 ack | `ACK` | Accusé de réception
 
 ##deregister
+
+`deregister` permet de se déconnecter du bus.
+
+> Requête
+
+```json
+{
+  "type" : "deregister",
+  "sender_id" : 1
+}
+```
+
+> Réponse
+
+```json
+{
+  "type" : "deregister",
+  "ack" : { "resp" : "ok" }
+}
+```
+**Paramètres**
+
+*Requête*
+
+Paramètres | Objet | Description
+--------- | ---  |-----------
+sender_id | `ID` | ID unique du capteur 
+
+*Réponse*
+
+Paramètres | Objet | Description
+--------- | ---  |-----------
+ack | `ACK` | Accusé de réception
+
 ##send
+
+`send` permet d'envoyer un message au bus.
+
+> Requête
+
+```json
+{
+  "type" : "send",
+  "sender_id" : 1,
+  "contents" : { "lat" : -49.202458, "lng": 20.687594 }
+}
+```
+
+> Réponse
+
+```json
+{
+  "type" : "send",
+  "ack" : { "resp" : "ok" }
+}
+```
+**Paramètres**
+
+*Requête*
+
+Paramètres | Objet | Description
+--------- | ---  |-----------
+sender_id | `ID` | ID unique du capteur 
+contents  | `CLASS_CONTENTS` | Payload spécifique à chaque classe [voir ici](#class-class_contents)
+
+*Réponse*
+
+Paramètres | Objet | Description
+--------- | ---  |-----------
+ack | `ACK` | Accusé de réception
+
+
 ##get
+
+`get` permet de récuperer un message du bus.
+
+> Requête
+
+```json
+{
+  "type" : "get",
+  "sender_id" : 1,
+  "msg_id" : 1025
+}
+```
+
+> Réponse
+
+```json
+{
+  "type" : "get",
+  "ack" : { "resp" : "ok" },
+  "msg_id" : 1025,
+  "date" : 1488463439214,
+  "contents" : { "lat" : -49.202458, "lng": 20.687594 }
+}
+```
+**Paramètres**
+
+*Requête*
+
+Paramètres | Objet | Description
+--------- | ---  |-----------
+sender_id | `ID` | ID unique du capteur 
+msg_id    | `MSG_ID`  | Numéro unique du message
+
+*Réponse*
+
+Paramètres | Objet | Description
+--------- | ---  |-----------
+ack | `ACK` | Accusé de réception
+msg_id    | `MSG_ID`  | Numéro unique du message
+date      | `DATE`   | Nombre de milliseconde depuis 1970, timestampé par le bus
+contents  | `CLASS_CONTENTS` | Payload spécifique à chaque classe [voir ici](#class-class_contents)
+
 ##get_last
-# Type des objets
+
+`get_last` permet de récuperer un message du bus.
+
+> Requête
+
+```json
+{
+  "type" : "get_last",
+  "sender_id" : 1
+}
+```
+
+> Réponse
+
+```json
+{
+  "type" : "get_last",
+  "ack" : { "resp" : "ok" },
+  "msg_id" : 1125,
+  "date" : 1488463439214,
+  "contents" : { "lat" : -49.202458, "lng": 20.687594 }
+}
+```
+**Paramètres**
+
+*Requête*
+
+Paramètres | Objet | Description
+--------- | ---  |-----------
+sender_id | `ID` | ID unique du capteur 
+contents  | `CLASS_CONTENTS` | Payload spécifique à chaque classe [voir ici](#class-class_contents)
+
+*Réponse*
+
+Paramètres | Objet | Description
+--------- | ---  |-----------
+ack | `ACK` | Accusé de réception
+msg_id    | `MSG_ID`  | Numéro unique du message
+date      | `DATE`   | Nombre de milliseconde depuis 1970, timestampé par le bus
+contents  | `CLASS_CONTENTS` | Payload spécifique à chaque classe [voir ici](#class-class_contents)
+# Objets
 
 ## ACK
 L'objet `ACK` représente l'échec ou la réussite d'une action
@@ -88,7 +244,7 @@ L'objet `ACK` représente l'échec ou la réussite d'une action
 
 {
   "resp" : "error",
-  "error_id" : "401"
+  "error_id" : 401
 }
 ```
 ## STRING
@@ -96,170 +252,91 @@ L'objet `STRING` représente une chaine de caractère, entouré de `"`
 
 *Exemple* :
 `"Gps 1"`
-## CLASS
-###GPS
-###Acceleromotre
-###Gyroscope
+##MSG_ID
+Numéro unique par capteur, représentant un message. *nombre entier*
 
-# Authentication
+##DATE
+Le nombre de seconde depuis 1970 timestampé par le bus. *nombre entier*
 
-> To authorize, use this code:
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-```
-
-```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-```
-
-> Make sure to replace `meowmeowmeow` with your API key.
-
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
-
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
-
-`Authorization: meowmeowmeow`
-
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
-
-# Kittens
-
-## Get All Kittens
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
-```
-
-```shell
-curl "http://example.com/api/kittens"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let kittens = api.kittens.get();
-```
-
-> The above command returns JSON structured like this:
+> Exemple
 
 ```json
-[
-  {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
-  },
-  {
-    "id": 2,
-    "name": "Max",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
-  }
-]
+"date" : 1488463439214
 ```
 
-This endpoint retrieves all kittens.
+##CLASS & CLASS_CONTENTS
+###GPS
+Les capteurs GPS font parties de la classe `"GPS"` .
 
-### HTTP Request
-
-`GET http://example.com/api/kittens`
-
-### Query Parameters
-
-Parameter | Default | Description
---------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
-
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
-
-## Get a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.get(2);
-```
-
-> The above command returns JSON structured like this:
+####CLASS_CONTENTS
+> Exemple
 
 ```json
 {
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
+    "type" : "send",
+    "sender_id" : 2,
+    "contents" : {
+            "lat" : -49.2578645,
+            "lng" : 20.2655465
+    }
+}
+```
+Le `CLASS_CONTENTS` de la classe `GPS` est un objet JSON avec deux champs:
+
+- `lat` représentant la latitude, *décimal pointé*
+- `lng` représentant la longitude, *décimal pointé*
+
+
+
+
+###Accéléromètre
+> Exemple
+
+```json
+{
+    "type" : "send",
+    "sender_id" : 2,
+    "contents" : {
+            "x" : 1.25,
+            "y" : 1.47,
+            "z" : 0
+    }
+}
+```
+Les capteurs de type accéléromètre font parties de la classe `"Accelerometer"` .
+
+####CLASS_CONTENTS
+
+Le `CLASS_CONTENTS` de la classe `Accelerometer` est un objet JSON avec trois champs:
+
+- `x` représentant l'accélération sur l'axe X, *décimal pointé*
+- `y` représentant l'accélération sur l'axe Y, *décimal pointé*
+- `z` représentant l'accélération sur l'axe Z, *décimal pointé*
+
+###Gyroscope
+
+> Exemple
+
+```json
+{
+    "type" : "send",
+    "sender_id" : 2,
+    "contents" : {
+            "x" : 120,
+            "y" : 300,
+            "z" : 0
+    }
 }
 ```
 
-This endpoint retrieves a specific kitten.
+Les capteurs de type gyroscope font parties de la classe `"Gyroscope"` .
 
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
 
-### HTTP Request
+####CLASS_CONTENTS
 
-`GET http://example.com/kittens/<ID>`
+Le `CLASS_CONTENTS` de la classe `Gyroscope` est un objet JSON avec trois champs:
 
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to retrieve
+- `x` représentant l'orientation de l'axe X, *nombre entier*
+- `y` représentant l'orientation de l'axe Y, *nombre entier*
+- `z` représentant l'orientation de l'axe Z, *nombre entier*
 
