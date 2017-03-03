@@ -18,16 +18,16 @@ search: true
 
 API pour le projet technologique.
 
+# Protocoles réseau
 
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
-
-We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
-
-This example API documentation page was created with [Slate](https://github.com/tripit/slate). Feel free to edit it and use it as a base for your own API's documentation.
+- Tous les échanges se font en TCP/IP.
+- Le Bus attend les connections entrantes sur le port 7182.
+- Émetteurs et récépteurs restent connectés le temps de leur activité ; le bus peut éventuellement admettre qu'un émetteur s'est déconnecté si celui-ci ferme sa connection TCP sans appeler `deregister`.
+- UN message JSON doit correspondre à UNE ligne unique.
 
 # Requêtes 
 
-Une action correspondent à un type.
+Une action correspond à un type.
 
 ## register
 
