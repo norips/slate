@@ -229,15 +229,18 @@
 
 <p>API pour le projet technologique.</p>
 
-<p>Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.</p>
+<h1 id="protocoles-r-seau">Protocoles réseau</h1>
 
-<p>We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
-
-<p>This example API documentation page was created with <a href="https://github.com/tripit/slate">Slate</a>. Feel free to edit it and use it as a base for your own API&rsquo;s documentation.</p>
+<ul>
+<li>Tous les échanges se font en TCP/IP.</li>
+<li>Le Bus attend les connections entrantes sur le port 7182.</li>
+<li>Émetteurs et récépteurs restent connectés le temps de leur activité ; le bus peut éventuellement admettre qu&#39;un émetteur s&#39;est déconnecté si celui-ci ferme sa connection TCP sans appeler <code class="prettyprint">deregister</code>.</li>
+<li>UN message JSON doit correspondre à UNE ligne unique.</li>
+</ul>
 
 <h1 id="requ-tes">Requêtes</h1>
 
-<p>Une action correspondent à un type.</p>
+<p>Une action correspond à un type.</p>
 
 <h2 id="register">register</h2>
 
@@ -334,6 +337,93 @@
 <td>sender_id</td>
 <td><code class="prettyprint">ID</code></td>
 <td>ID unique du capteur</td>
+</tr>
+</tbody></table>
+
+<p><em>Réponse</em></p>
+
+<table><thead>
+<tr>
+<th>Paramètres</th>
+<th>Objet</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ack</td>
+<td><code class="prettyprint">ACK</code></td>
+<td>Accusé de réception</td>
+</tr>
+</tbody></table>
+
+<h2 id="list">list</h2>
+
+<p><code class="prettyprint">list</code> permet de lister les capteurs présents sur le bus.</p>
+
+<blockquote>
+<p>Requête</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"list"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"sender_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"GPS"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>ou
+<code class="prettyprint">json
+{
+  &quot;type&quot; : &quot;list&quot;,
+  &quot;sender_name&quot; : &quot;GPS 2&quot;
+}
+</code>
+ou
+<code class="prettyprint">json
+{
+  &quot;type&quot; : &quot;list&quot;
+}
+</code></p>
+
+<blockquote>
+<p>Réponse</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"send"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"ack"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s2">"resp"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="w"> </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"results"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"sender_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"sender_class"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"GPS"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"sender_name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"GPS 2"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"last_message_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1025</span><span class="w">        
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"sender_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"sender_class"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"GPS"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"sender_name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"GPS 3"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"last_message_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">124</span><span class="w">        
+        </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p><strong>Paramètres</strong></p>
+
+<p><em>Requête</em></p>
+
+<table><thead>
+<tr>
+<th>Paramètres</th>
+<th>Objet</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>sender_id</td>
+<td><code class="prettyprint">ID</code></td>
+<td>ID unique du capteur</td>
+</tr>
+<tr>
+<td>contents</td>
+<td><code class="prettyprint">CLASS_CONTENTS</code></td>
+<td>Payload spécifique à chaque classe <a href="#class-class_contents">voir ici</a></td>
 </tr>
 </tbody></table>
 
