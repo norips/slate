@@ -102,6 +102,71 @@ Paramètres | Objet | Description
 --------- | ---  |-----------
 ack | `ACK` | Accusé de réception
 
+##list
+
+`list` permet de lister les capteurs présents sur le bus.
+
+> Requête
+
+```json
+{
+  "type" : "list",
+  "sender_id" : "GPS"
+}
+```
+ou
+```json
+{
+  "type" : "list",
+  "sender_name" : "GPS 2"
+}
+```
+ou
+```json
+{
+  "type" : "list"
+}
+```
+
+
+> Réponse
+
+```json
+{
+  "type" : "send",
+  "ack" : { "resp" : "ok" },
+  "results" : [
+        {
+            "sender_id" : 1,
+            "sender_class" : "GPS",
+            "sender_name" : "GPS 2",
+            "last_message_id" : 1025        
+        },
+        {
+            "sender_id" : 2,
+            "sender_class" : "GPS",
+            "sender_name" : "GPS 3",
+            "last_message_id" : 124        
+        }
+  ]
+}
+```
+**Paramètres**
+
+*Requête*
+
+Paramètres | Objet | Description
+--------- | ---  |-----------
+sender_id | `ID` | ID unique du capteur 
+contents  | `CLASS_CONTENTS` | Payload spécifique à chaque classe [voir ici](#class-class_contents)
+
+*Réponse*
+
+Paramètres | Objet | Description
+--------- | ---  |-----------
+ack | `ACK` | Accusé de réception
+
+
 ##send
 
 `send` permet d'envoyer un message au bus.
