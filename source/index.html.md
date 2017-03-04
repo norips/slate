@@ -33,7 +33,7 @@ Une action correspond à un type.
 
 `register` permet de s'enregistrer auprés du bus.
 
-> Requête
+> **Requête**
 
 ```json
 {
@@ -43,11 +43,12 @@ Une action correspond à un type.
 }
 ```
 
-> Réponse
+> **Réponse**
 
 ```json
 {
   "type" : "register",
+  "sender_id" : 1,
   "ack" : { "resp" : "ok" }
 }
 ```
@@ -65,13 +66,14 @@ sender_name | `STRING`  | Nom du capteur
 
 Paramètres | Objet | Description
 --------- | ---  |-----------
+sender_id | `ID` | ID unique du capteur renvoyé par le bus
 ack | `ACK` | Accusé de réception
 
 ##deregister
 
 `deregister` permet de se déconnecter du bus.
 
-> Requête
+> **Requête**
 
 ```json
 {
@@ -80,7 +82,7 @@ ack | `ACK` | Accusé de réception
 }
 ```
 
-> Réponse
+> **Réponse**
 
 ```json
 {
@@ -106,22 +108,26 @@ ack | `ACK` | Accusé de réception
 
 `list` permet de lister les capteurs présents sur le bus.
 
-> Requête
+> **Requête**
 
 ```json
 {
   "type" : "list",
-  "sender_id" : "GPS"
+  "sender_class" : "GPS"
 }
 ```
-ou
+
+> ou
+
 ```json
 {
   "type" : "list",
   "sender_name" : "GPS 2"
 }
 ```
-ou
+
+> ou
+
 ```json
 {
   "type" : "list"
@@ -129,11 +135,11 @@ ou
 ```
 
 
-> Réponse
+> **Réponse**
 
 ```json
 {
-  "type" : "send",
+  "type" : "list",
   "ack" : { "resp" : "ok" },
   "results" : [
         {
@@ -157,13 +163,17 @@ ou
 
 Paramètres | Objet | Description
 --------- | ---  |-----------
-sender_id | `ID` | ID unique du capteur 
-contents  | `CLASS_CONTENTS` | Payload spécifique à chaque classe [voir ici](#class-class_contents)
+sender_class | `CLASS` | Nom de la classe 
+sender_name | `STRING`  | Nom du capteur
 
 *Réponse*
 
 Paramètres | Objet | Description
 --------- | ---  |-----------
+sender_class | `CLASS` | Nom de la classe 
+sender_name | `STRING`  | Nom du capteur
+sender_id | `ID` | ID unique du capteur 
+last_message_id    | `MSG_ID`  | Numéro unique du message
 ack | `ACK` | Accusé de réception
 
 
@@ -171,7 +181,7 @@ ack | `ACK` | Accusé de réception
 
 `send` permet d'envoyer un message au bus.
 
-> Requête
+> **Requête**
 
 ```json
 {
@@ -181,7 +191,7 @@ ack | `ACK` | Accusé de réception
 }
 ```
 
-> Réponse
+> **Réponse**
 
 ```json
 {
@@ -209,7 +219,7 @@ ack | `ACK` | Accusé de réception
 
 `get` permet de récuperer un message du bus.
 
-> Requête
+> **Requête**
 
 ```json
 {
@@ -219,7 +229,7 @@ ack | `ACK` | Accusé de réception
 }
 ```
 
-> Réponse
+> **Réponse**
 
 ```json
 {
@@ -252,7 +262,7 @@ contents  | `CLASS_CONTENTS` | Payload spécifique à chaque classe [voir ici](#
 
 `get_last` permet de récuperer un message du bus.
 
-> Requête
+> **Requête**
 
 ```json
 {
@@ -261,7 +271,7 @@ contents  | `CLASS_CONTENTS` | Payload spécifique à chaque classe [voir ici](#
 }
 ```
 
-> Réponse
+> **Réponse**
 
 ```json
 {
