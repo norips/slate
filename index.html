@@ -247,7 +247,7 @@
 <p><code class="prettyprint">register</code> permet de s&#39;enregistrer auprés du bus.</p>
 
 <blockquote>
-<p>Requête</p>
+<p><strong>Requête</strong></p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"register"</span><span class="p">,</span><span class="w">
@@ -256,10 +256,11 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <blockquote>
-<p>Réponse</p>
+<p><strong>Réponse</strong></p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"register"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"sender_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="s2">"ack"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s2">"resp"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="w"> </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -296,6 +297,11 @@
 </tr>
 </thead><tbody>
 <tr>
+<td>sender_id</td>
+<td><code class="prettyprint">ID</code></td>
+<td>ID unique du capteur renvoyé par le bus</td>
+</tr>
+<tr>
 <td>ack</td>
 <td><code class="prettyprint">ACK</code></td>
 <td>Accusé de réception</td>
@@ -307,7 +313,7 @@
 <p><code class="prettyprint">deregister</code> permet de se déconnecter du bus.</p>
 
 <blockquote>
-<p>Requête</p>
+<p><strong>Requête</strong></p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"deregister"</span><span class="p">,</span><span class="w">
@@ -315,7 +321,7 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <blockquote>
-<p>Réponse</p>
+<p><strong>Réponse</strong></p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"deregister"</span><span class="p">,</span><span class="w">
@@ -361,32 +367,33 @@
 <p><code class="prettyprint">list</code> permet de lister les capteurs présents sur le bus.</p>
 
 <blockquote>
-<p>Requête</p>
+<p><strong>Requête</strong></p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"list"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"sender_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"GPS"</span><span class="w">
+  </span><span class="s2">"sender_class"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"GPS"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>ou
-<code class="prettyprint">json
-{
-  &quot;type&quot; : &quot;list&quot;,
-  &quot;sender_name&quot; : &quot;GPS 2&quot;
-}
-</code>
-ou
-<code class="prettyprint">json
-{
-  &quot;type&quot; : &quot;list&quot;
-}
-</code></p>
-
 <blockquote>
-<p>Réponse</p>
+<p>ou</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"send"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"list"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"sender_name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"GPS 2"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>ou</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"list"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p><strong>Réponse</strong></p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"list"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"ack"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s2">"resp"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="w"> </span><span class="p">},</span><span class="w">
   </span><span class="s2">"results"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
@@ -416,14 +423,14 @@ ou
 </tr>
 </thead><tbody>
 <tr>
-<td>sender_id</td>
-<td><code class="prettyprint">ID</code></td>
-<td>ID unique du capteur</td>
+<td>sender_class</td>
+<td><code class="prettyprint">CLASS</code></td>
+<td>Nom de la classe</td>
 </tr>
 <tr>
-<td>contents</td>
-<td><code class="prettyprint">CLASS_CONTENTS</code></td>
-<td>Payload spécifique à chaque classe <a href="#class-class_contents">voir ici</a></td>
+<td>sender_name</td>
+<td><code class="prettyprint">STRING</code></td>
+<td>Nom du capteur</td>
 </tr>
 </tbody></table>
 
@@ -437,6 +444,26 @@ ou
 </tr>
 </thead><tbody>
 <tr>
+<td>sender_class</td>
+<td><code class="prettyprint">CLASS</code></td>
+<td>Nom de la classe</td>
+</tr>
+<tr>
+<td>sender_name</td>
+<td><code class="prettyprint">STRING</code></td>
+<td>Nom du capteur</td>
+</tr>
+<tr>
+<td>sender_id</td>
+<td><code class="prettyprint">ID</code></td>
+<td>ID unique du capteur</td>
+</tr>
+<tr>
+<td>last_message_id</td>
+<td><code class="prettyprint">MSG_ID</code></td>
+<td>Numéro unique du message</td>
+</tr>
+<tr>
 <td>ack</td>
 <td><code class="prettyprint">ACK</code></td>
 <td>Accusé de réception</td>
@@ -448,7 +475,7 @@ ou
 <p><code class="prettyprint">send</code> permet d&#39;envoyer un message au bus.</p>
 
 <blockquote>
-<p>Requête</p>
+<p><strong>Requête</strong></p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"send"</span><span class="p">,</span><span class="w">
@@ -457,7 +484,7 @@ ou
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <blockquote>
-<p>Réponse</p>
+<p><strong>Réponse</strong></p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"send"</span><span class="p">,</span><span class="w">
@@ -508,7 +535,7 @@ ou
 <p><code class="prettyprint">get</code> permet de récuperer un message du bus.</p>
 
 <blockquote>
-<p>Requête</p>
+<p><strong>Requête</strong></p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"get"</span><span class="p">,</span><span class="w">
@@ -517,7 +544,7 @@ ou
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <blockquote>
-<p>Réponse</p>
+<p><strong>Réponse</strong></p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"get"</span><span class="p">,</span><span class="w">
@@ -586,7 +613,7 @@ ou
 <p><code class="prettyprint">get_last</code> permet de récuperer un message du bus.</p>
 
 <blockquote>
-<p>Requête</p>
+<p><strong>Requête</strong></p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"get_last"</span><span class="p">,</span><span class="w">
@@ -594,7 +621,7 @@ ou
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <blockquote>
-<p>Réponse</p>
+<p><strong>Réponse</strong></p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"get_last"</span><span class="p">,</span><span class="w">
