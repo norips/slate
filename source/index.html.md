@@ -289,7 +289,6 @@ contents  | `CLASS_CONTENTS` | Payload spécifique à chaque classe [voir ici](#
 Paramètres | Objet | Description
 --------- | ---  |-----------
 sender_id | `ID` | ID unique du capteur 
-contents  | `CLASS_CONTENTS` | Payload spécifique à chaque classe [voir ici](#class-class_contents)
 
 *Réponse*
 
