@@ -130,6 +130,16 @@ ack | `ACK` | Accusé de réception
 
 ```json
 {
+  "type" : "list",
+  "sender_class" : "GPS",
+  "sender_name" : "GPS 2"
+}
+```
+
+> ou
+
+```json
+{
   "type" : "list"
 }
 ```
