@@ -33,6 +33,8 @@ Une action correspond à un type.
 
 `register` permet de s'enregistrer auprés du bus.
 
+Si le bus ne peut pas effectuer l'opération, il renvoi le code d'erreur `400` en acquittement.
+
 > **Requête**
 
 ```json
@@ -229,6 +231,10 @@ ack | `ACK` | Accusé de réception
 
 `get` permet de récuperer un message du bus.
 
+- Si l'identifiant du message (`msg_id`) est inférieur à l'identifiant du message le plus ancien de la file, on renvoi le message le plus ancien.
+- Si l'identifiant du message (`msg_id`) est supérieur à l'identifiant du message le plus récent de la file, on renvoi le code d'erreur `404` en acquittement.
+- Si la file est vide, on renvoi le code d'erreur `404` en acquittement.
+
 > **Requête**
 
 ```json
@@ -271,6 +277,8 @@ contents  | `CLASS_CONTENTS` | Payload spécifique à chaque classe [voir ici](#
 ##get_last
 
 `get_last` permet de récuperer un message du bus.
+
+Si la file est vide, on renvoi le code d'erreur `404` en acquittement.
 
 > **Requête**
 
