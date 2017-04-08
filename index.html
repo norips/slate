@@ -246,6 +246,8 @@
 
 <p><code class="prettyprint">register</code> permet de s&#39;enregistrer auprés du bus.</p>
 
+<p>Si le bus ne peut pas effectuer l&#39;opération, il renvoi le code d&#39;erreur <code class="prettyprint">400</code> en acquittement.</p>
+
 <blockquote>
 <p><strong>Requête</strong></p>
 </blockquote>
@@ -543,6 +545,12 @@
 
 <p><code class="prettyprint">get</code> permet de récuperer un message du bus.</p>
 
+<ul>
+<li>Si l&#39;identifiant du message (<code class="prettyprint">msg_id</code>) est inférieur à l&#39;identifiant du message le plus ancien de la file, on renvoi le message le plus ancien.</li>
+<li>Si l&#39;identifiant du message (<code class="prettyprint">msg_id</code>) est supérieur à l&#39;identifiant du message le plus récent de la file, on renvoi le code d&#39;erreur <code class="prettyprint">404</code> en acquittement.</li>
+<li>Si la file est vide, on renvoi le code d&#39;erreur <code class="prettyprint">404</code> en acquittement.</li>
+</ul>
+
 <blockquote>
 <p><strong>Requête</strong></p>
 </blockquote>
@@ -620,6 +628,8 @@
 <h2 id="get_last">get_last</h2>
 
 <p><code class="prettyprint">get_last</code> permet de récuperer un message du bus.</p>
+
+<p>Si la file est vide, on renvoi le code d&#39;erreur <code class="prettyprint">404</code> en acquittement.</p>
 
 <blockquote>
 <p><strong>Requête</strong></p>
